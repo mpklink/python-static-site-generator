@@ -1,5 +1,6 @@
 from typing import List
 from pathlib import Path
+import shutil
 
 class Parser:
     extensions: List[str] = []
@@ -18,3 +19,12 @@ class Parser:
         full_path = dest / path.with_suffix(ext).name
         with open(full_path, "w") as file:
             file.write(content)
+
+    def copy(self, path, source, dest):
+        shutil.copy2(path, dest / path.relative_to(source))
+
+class ResourceParser(Parser):
+    extensions = [".jpg", ".png", ".gif", ".css", ".html"]
+
+    def parse(self, path: Path, source: Path, dest: Path):
+        super().copy(path, source, dest)
