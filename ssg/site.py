@@ -1,4 +1,3 @@
-from _typeshed import NoneType
 from pathlib import Path
 import sys
 
